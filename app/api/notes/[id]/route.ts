@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const token = await getToken({ req: request });
-    const { id: noteId } = params;
+    const { id: noteId } = context.params;
 
     if (!token?.tenantId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

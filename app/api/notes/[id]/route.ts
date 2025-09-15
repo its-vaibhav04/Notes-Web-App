@@ -4,13 +4,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
-export async function DELETE(request: NextRequest, context: RouteContext) {
+export async function DELETE(
+  request: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
     const token = await getToken({ req: request });
     const { id: noteId } = context.params;

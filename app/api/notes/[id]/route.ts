@@ -4,13 +4,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function DELETE(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function DELETE(request: NextRequest, { params }: any) {
   try {
     const token = await getToken({ req: request });
-    const { id: noteId } = context.params;
+    const noteId = params.id;
 
     if (!token?.tenantId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

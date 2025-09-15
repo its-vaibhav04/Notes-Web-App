@@ -4,10 +4,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function POST(request: NextRequest, { params }: any) {
   try {
     const token = await getToken({ req: request });
     const { slug: tenantSlugFromUrl } = params;
